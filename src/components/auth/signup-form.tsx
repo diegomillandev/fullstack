@@ -14,6 +14,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { MessageError } from "../shared/message-error";
+import { signUp } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 export const SignUpForm = () => {
   const {
@@ -25,7 +27,20 @@ export const SignUpForm = () => {
   });
 
   const onSubmit = async (data: SignupInput) => {
-    console.log(data);
+    await signUp.email(
+      {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+      },
+      {
+        onRequest: () => {},
+        onSuccess: () => {},
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+      }
+    );
   };
 
   return (

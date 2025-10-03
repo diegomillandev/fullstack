@@ -1,4 +1,4 @@
-const getEnv = (key: string, defaultValue: string) => {
+const getEnv = (key: string, defaultValue?: string) => {
   const value = process.env[key] || defaultValue;
 
   if (value === undefined) {
@@ -8,7 +8,5 @@ const getEnv = (key: string, defaultValue: string) => {
   return value;
 };
 
-export const NEXT_PUBLIC_API_URL = getEnv(
-  "NEXT_PUBLIC_API_URL",
-  "http://localhost:3000"
-);
+export const NEXT_PUBLIC_API_URL = getEnv("NEXT_PUBLIC_API_URL");
+export const BETTER_AUTH_URL = getEnv("BETTER_AUTH_URL");
