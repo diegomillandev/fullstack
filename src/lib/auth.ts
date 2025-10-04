@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@/lib/prisma";
+import { createPasswordHash, comparePasswordToHash } from "@/lib/argon2";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -8,5 +9,13 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    autoSignIn: false,
+    password: {
+      hash: createPasswordHash,
+      verify: comparePasswordToHash,
+    },
+  },
+  advanced: {
+    generateId: false,
   },
 });

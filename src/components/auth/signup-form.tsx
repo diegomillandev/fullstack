@@ -13,15 +13,20 @@ import { SignupInput } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { MessageError } from "../shared/message-error";
 import { signUp } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { LoadingIcon, MessageError } from "@/components/shared";
 
 export const SignUpForm = () => {
+  const [isPending, setIsPending] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(SignupSchema),
   });
@@ -34,10 +39,19 @@ export const SignUpForm = () => {
         name: data.name,
       },
       {
-        onRequest: () => {},
-        onSuccess: () => {},
+        onRequest: () => {
+          setIsPending(true);
+        },
+        onResponse: () => {
+          setIsPending(false);
+        },
         onError: (ctx) => {
           toast.error(ctx.error.message);
+        },
+        onSuccess: () => {
+          toast.success("Account created successfully");
+          reset();
+          router.push("/sign-in");
         },
       }
     );
@@ -113,7 +127,12 @@ export const SignUpForm = () => {
                 )}
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full cursor-pointer">
+                <Button
+                  type="submit"
+                  className="w-full cursor-pointer"
+                  disabled={isPending}
+                >
+                  {isPending ? <LoadingIcon /> : null}
                   Create Account
                 </Button>
               </div>
