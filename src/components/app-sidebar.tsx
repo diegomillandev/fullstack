@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BadgeDollarSign, LayoutDashboard } from "lucide-react";
+import { BadgeDollarSign } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import {
@@ -11,16 +11,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-
-const data = {
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-      icon: LayoutDashboard,
-    },
-  ],
-};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -42,7 +32,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain />
       </SidebarContent>
     </Sidebar>
   );
