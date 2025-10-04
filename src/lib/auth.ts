@@ -15,6 +15,14 @@ export const auth = betterAuth({
       verify: comparePasswordToHash,
     },
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: ["USER", "ADMIN"],
+        input: false,
+      },
+    },
+  },
   advanced: {
     generateId: false,
   },
