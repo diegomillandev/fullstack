@@ -4,7 +4,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -12,16 +12,46 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "../ui/button";
 import { ArrowRightFromLine, MoreHorizontal } from "lucide-react";
-import { signOut } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { LoadingPage } from "../shared/loading-page";
 
-type Props = {
-  children: ReactNode;
-};
+const ADMIN_ROUTES = ["/reports", "/users"];
 
-export default function AppLayout({ children }: Props) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  const { data: session, isPending } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    if (isPending) return;
+
+    const isAdminRoute = ADMIN_ROUTES.some((route) =>
+      pathname.startsWith(route)
+    );
+    const userRole = session?.user?.role;
+
+    if (isAdminRoute && userRole !== "ADMIN") {
+      toast.error("You do not have access to this page");
+      router.replace("/");
+      setAuthorized(false);
+      return;
+    }
+
+    setAuthorized(true);
+  }, [isPending, session, pathname, router]);
+
+  if (isPending) {
+    return <LoadingPage />;
+  }
+
+  if (!authorized) {
+    return <LoadingPage />;
+  }
+
   const handleSignOut = async () => {
     await signOut({
       fetchOptions: {

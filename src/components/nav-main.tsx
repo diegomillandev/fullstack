@@ -20,7 +20,9 @@ export function NavMain() {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel className="text-xs font-bold">
+        Platform
+      </SidebarGroupLabel>
       <SidebarMenu>
         {filteredNavItems.map((item) => (
           <Collapsible key={item.title} asChild>

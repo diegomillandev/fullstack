@@ -27,9 +27,9 @@ import {
 
 export const navCardItems: NavCardItem[] = [
   {
-    title: "Movement Management",
+    title: "Transactions",
     description: "Track and manage all income and expenses across users.",
-    href: "/movements",
+    href: "/transactions",
     requiredRole: "USER",
     icon: PiggyBank,
   },
@@ -80,7 +80,7 @@ export default function Home() {
               <Button key={item.title} asChild variant="ghost">
                 <Link
                   href={item.href}
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                  className="text-gray-600 hover:text-red-900 dark:text-gray-400 dark:hover:text-white"
                 >
                   {item.title}
                 </Link>
@@ -128,8 +128,10 @@ export default function Home() {
                       </div>
 
                       {/* Título y Descripción */}
-                      <CardTitle className="text-lg">{item.title}</CardTitle>
-                      <CardDescription className="mt-1">
+                      <CardTitle className="text-lg text-center">
+                        {item.title}
+                      </CardTitle>
+                      <CardDescription className="mt-1 text-center">
                         {item.description}
                       </CardDescription>
                     </CardHeader>

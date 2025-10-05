@@ -15,7 +15,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <Main />
         <NextScript />
       </body>

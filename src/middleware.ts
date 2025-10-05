@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
   const isLoggedIn = !!sesionCookie;
 
   const isAuthRoute = AUTH_ROUTES.includes(nextUrl.pathname);
-  const isApiRoute = nextUrl.pathname.startsWith("/api/");
+  const isApiRoute = nextUrl.pathname.startsWith("/api/auth");
   const isPublicFile = /\.(.*)$/.test(nextUrl.pathname);
 
   const isProtectedRoute = !isAuthRoute && !isApiRoute && !isPublicFile;

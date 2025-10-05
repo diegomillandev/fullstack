@@ -9,6 +9,7 @@ export interface NavItem {
   href: string;
   icon?: React.ReactNode;
   requiredRole: "ADMIN" | "USER" | null;
+  isActive?: boolean;
 }
 
 export interface NavCardItem {

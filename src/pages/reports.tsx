@@ -1,8 +1,13 @@
 import AppLayout from "@/components/layouts/app-layout";
+import InformeTransacciones from "@/components/reports/reports";
 import { ReactElement } from "react";
 
 export default function ReportsPage() {
-  return <div>ReportsPage</div>;
+  return (
+    <>
+      <InformeTransacciones />
+    </>
+  );
 }
 
 ReportsPage.getLayout = function getLayout(page: ReactElement) {
