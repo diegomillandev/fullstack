@@ -49,8 +49,11 @@ export const ListUsers = () => {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
           {
-            method: "GET",
+            method: "POST",
             headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user_id: session?.user.id,
+            }),
           }
         );
 
@@ -62,7 +65,7 @@ export const ListUsers = () => {
         const data = await response.json();
         setUsers(data);
       } catch (error) {
-        console.error("💥 Fetch error:", error);
+        console.error("Fetch error:", error);
       } finally {
         setLoading(false);
       }

@@ -37,7 +37,7 @@ export const ListTransaction = () => {
     const getTransaction = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/transactions`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/transactions?user_id=${session?.user.id}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
