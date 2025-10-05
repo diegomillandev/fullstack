@@ -123,12 +123,10 @@ export default function InformeTransacciones() {
   return (
     <div className="p-4 md:p-8 space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Informe de transacciones</h1>
+        <h1 className="text-2xl font-semibold">Transaction Report</h1>
         <div className="flex gap-2">
-          <Button onClick={() => exportToCSV(transactions)}>
-            Exportar CSV
-          </Button>
-          <Button>Refrescar</Button>
+          <Button onClick={() => exportToCSV(transactions)}>Export CSV</Button>
+          <Button>Refresh</Button>
         </div>
       </div>
       {loading ? (
@@ -138,7 +136,7 @@ export default function InformeTransacciones() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card className="p-4">
               <CardHeader>
-                <CardTitle>Total Ingresos</CardTitle>
+                <CardTitle>Total Income</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">
@@ -148,14 +146,14 @@ export default function InformeTransacciones() {
                   })}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Suma de todas las transacciones tipo INCOME
+                  Sum of all INCOME type transactions
                 </div>
               </CardContent>
             </Card>
 
             <Card className="p-4">
               <CardHeader>
-                <CardTitle>Total Gastos</CardTitle>
+                <CardTitle>Total Expenses</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">
@@ -165,21 +163,21 @@ export default function InformeTransacciones() {
                   })}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Suma de todas las transacciones tipo EXPENSE
+                  Sum of all EXPENSE type transactions
                 </div>
               </CardContent>
             </Card>
 
             <Card className="p-4">
               <CardHeader>
-                <CardTitle>Resultado Neto</CardTitle>
+                <CardTitle>Net Result</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">
                   ${net.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Ingresos - Gastos
+                  Income - Expenses
                 </div>
               </CardContent>
             </Card>
@@ -188,7 +186,7 @@ export default function InformeTransacciones() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Ingresos vs Gastos por día</CardTitle>
+                <CardTitle>Income vs Expenses per Day</CardTitle>
               </CardHeader>
               <CardContent className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
@@ -209,7 +207,7 @@ export default function InformeTransacciones() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Composición (Total)</CardTitle>
+                <CardTitle>Composition (Total)</CardTitle>
               </CardHeader>
               <CardContent className="h-80 flex items-center justify-center">
                 <ResponsiveContainer width="100%" height={260}>
@@ -238,7 +236,7 @@ export default function InformeTransacciones() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Listado de transacciones</CardTitle>
+              <CardTitle>Transaction List</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
@@ -246,10 +244,10 @@ export default function InformeTransacciones() {
                   <thead className="text-left uppercase text-xs text-muted-foreground">
                     <tr>
                       <th className="px-2 py-2">ID</th>
-                      <th className="px-2 py-2">Fecha</th>
-                      <th className="px-2 py-2">Concepto</th>
-                      <th className="px-2 py-2">Tipo</th>
-                      <th className="px-2 py-2 text-right">Monto</th>
+                      <th className="px-2 py-2">Date</th>
+                      <th className="px-2 py-2">Concept</th>
+                      <th className="px-2 py-2">Type</th>
+                      <th className="px-2 py-2 text-right">Amount</th>
                     </tr>
                   </thead>
                   <tbody>
