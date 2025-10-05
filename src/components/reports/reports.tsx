@@ -14,6 +14,7 @@ import {
   Legend,
 } from "recharts";
 import { toast } from "sonner";
+import { useSession } from "@/lib/auth-client";
 
 type Transaction = {
   id: number | string;
@@ -64,7 +65,8 @@ export function exportToCSV(data: Transaction[]) {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
-export default function InformeTransacciones() {
+export const Reports = () => {
+  const { data: session } = useSession();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -72,7 +74,7 @@ export default function InformeTransacciones() {
     const getTransaction = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/transactions`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/transactions?user_id=${session?.user.id}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -94,7 +96,7 @@ export default function InformeTransacciones() {
     };
 
     getTransaction();
-  }, []);
+  }, [session]);
 
   const totals = transactions.reduce(
     (acc, t) => {
@@ -276,4 +278,4 @@ export default function InformeTransacciones() {
       )}
     </div>
   );
-}
+};
